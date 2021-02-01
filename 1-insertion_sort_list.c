@@ -107,7 +107,7 @@ size_t dlistint_len(const listint_t *list)
 	int n = 0;
 
 	if (list == NULL)
-		return (0);
+		return;
 	while (list != NULL)
 	{
 		n++;
