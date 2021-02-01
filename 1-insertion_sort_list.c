@@ -91,17 +91,3 @@ listint_t **swap(listint_t *temp_sort, listint_t *swapper, listint_t **list)
 	}
 	return (list);
 }
-
-int dlistint_len(const listint_t *list)
-{
-	int n = 0;
-
-	if (list == NULL)
-		return (0);
-	while (list != NULL)
-	{
-		n++;
-		list = list->next;
-	}
-	return (n);
-}
