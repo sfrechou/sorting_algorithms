@@ -102,7 +102,7 @@ listint_t **swap(listint_t *temp_sort, listint_t *swapper, listint_t **list)
 	return (list);
 }
 
-size_t dlistint_len(const listint_t *list)
+size_t dlistint_len(listint_t *list)
 {
 	int n = 0;
 
