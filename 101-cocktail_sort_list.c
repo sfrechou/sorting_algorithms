@@ -8,19 +8,24 @@
 
 void cocktail_sort_list(listint_t **list)
 {
-    listint_t *p_max = *list, *recorro;
+    listint_t *recorro;
     int i = 0, len = 0;
 
-    while (p_max->next != NULL)
-    {
-        p_max = p_max->next;
-        len++;
-    }
-
-    len += 1;
+    len = dlistint_len(*list);
 
 	if (len < 2)
 		return;
+    
+    if (len == 2)
+	{
+        recorro = *list;
+		if (recorro->n > (recorro->next)->n)
+		{
+			swap(recorro->next, recorro, list);
+			print_list(*list);
+		}
+		return;
+	}
     while (i < len / 2)
     {
         recorro = *list;
@@ -63,7 +68,17 @@ listint_t **swap(listint_t *temp_sort, listint_t *swapper, listint_t **list)
 	listint_t *aux_prev, *aux_next = temp_sort->next;
 
 	swapper = temp_sort->prev;
-    if (swapper->prev == NULL)
+	if (dlistint_len(*list) == 2)
+	{
+		temp_sort->next = temp_sort->prev;
+		temp_sort->prev = NULL;
+		swapper->prev = swapper->next;
+        
+		swapper->next = NULL;
+        
+		*list = temp_sort;
+	}
+	else if (swapper->prev == NULL)
 	{
 		temp_sort->prev = NULL;
 		temp_sort->next = swapper;
@@ -90,6 +105,20 @@ listint_t **swap(listint_t *temp_sort, listint_t *swapper, listint_t **list)
 		swapper->next = aux_next;
 		swapper->prev = temp_sort;
 		aux_next->prev = swapper;
-	}
+    }
 	return (list);
+}
+
+int dlistint_len(const listint_t *list)
+{
+	int n = 0;
+
+	if (list == NULL)
+		return (0);
+	while (list != NULL)
+	{
+		n++;
+		list = list->next;
+	}
+	return (n);
 }
