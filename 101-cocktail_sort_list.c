@@ -19,6 +19,8 @@ void cocktail_sort_list(listint_t **list)
 
     len += 1;
 
+	if (len < 2)
+		return;
     while (i < len / 2)
     {
         recorro = *list;
