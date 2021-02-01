@@ -10,7 +10,7 @@ void insertion_sort_list(listint_t **list)
 	listint_t *temp_n, *temp_sort, *swapper;
 	int len = dlistint_len(*list);
 
-	if (list == NULL || *list == NULL)
+	if (!list || *list == NULL)
 		return;
 
 	if (len < 2)
@@ -107,7 +107,7 @@ size_t dlistint_len(const listint_t *list)
 	int n = 0;
 
 	if (list == NULL)
-		return;
+		return (0);
 	while (list != NULL)
 	{
 		n++;
