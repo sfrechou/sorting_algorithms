@@ -22,7 +22,7 @@ void insertion_sort_list(listint_t **list)
 		temp_n = temp_n->next;
 		if (temp_n->n < (temp_n->prev)->n)
 		{
-			swap(temp_n, temp_n->prev, list);
+			swap(temp_n->prev, temp_n, list);
 			print_list(*list);
 		}
 		return;
@@ -37,11 +37,11 @@ void insertion_sort_list(listint_t **list)
 				swapper = temp_sort->prev;
 				if (swapper->prev == NULL)
 				{
-					swap(temp_sort, swapper, list);
+					swap(swapper, temp_sort, list);
 					print_list(*list);
 					break;
 				}
-				swap(temp_sort, swapper, list);
+				swap(swapper, temp_sort, list);
 				print_list(*list);
 			}
 		}
@@ -60,49 +60,46 @@ void insertion_sort_list(listint_t **list)
 */
 listint_t **swap(listint_t *temp_sort, listint_t *swapper, listint_t **list)
 {
-	listint_t *aux_prev, *aux_next = temp_sort->next;
+	listint_t *aux_prev = temp_sort->prev, *aux_next = swapper->next;
 
-	swapper = temp_sort->prev;
 	if (dlistint_len(*list) == 2)
 	{
-		temp_sort->next = temp_sort->prev;
-		temp_sort->prev = NULL;
-		swapper->prev = swapper->next;
-		swapper->next = NULL;
-		*list = temp_sort;
+		temp_sort->next = NULL;
+		swapper->prev = NULL;
+		temp_sort->prev = swapper;
+		swapper->next = temp_sort;
+		*list = swapper;
 	}
-	else if (swapper->prev == NULL)
+	else if (temp_sort->prev == NULL)
 	{
-		temp_sort->prev = NULL;
-		temp_sort->next = swapper;
-		swapper->prev = temp_sort;
-		swapper->next = aux_next;
-		aux_next->prev = swapper;
-		*list = temp_sort;
+		temp_sort->next = aux_next;
+		swapper->prev = NULL;
+		temp_sort->prev = swapper;
+		swapper->next = temp_sort;
+		aux_next->prev = temp_sort;
+		*list = swapper;
 	}
-	else if (temp_sort->next == NULL)
+	else if (swapper->next == NULL)
 	{
-		aux_prev = swapper->prev;
-		aux_prev->next = temp_sort;
-		temp_sort->prev = aux_prev;
-		temp_sort->next = swapper;
-		swapper->prev = temp_sort;
-		swapper->next = NULL;
+		temp_sort->prev = swapper;
+		swapper->next = temp_sort;
+		swapper->prev = aux_prev;
+		aux_prev->next = swapper;
+		temp_sort->next = NULL;
 	}
 	else
 	{
-		aux_prev = swapper->prev;
-		aux_prev->next = temp_sort;
-		temp_sort->prev = aux_prev;
-		temp_sort->next = swapper;
-		swapper->next = aux_next;
-		swapper->prev = temp_sort;
-		aux_next->prev = swapper;
+		temp_sort->prev = swapper;
+		swapper->next = temp_sort;
+		temp_sort->next = aux_next;
+		swapper->prev = aux_prev;
+		aux_prev->next = swapper;
+		aux_next->prev = temp_sort;
 	}
 	return (list);
 }
 
-size_t dlistint_len(listint_t *list)
+int dlistint_len(const listint_t *list)
 {
 	int n = 0;
 
