@@ -8,54 +8,68 @@
 */
 void heap_sort(int *array, size_t size)
 {
-    int end, temp = 0;
+	int end, temp = 0;
 
-    heapify(array, size);
+	heapify(array, size);
 
-    end = (int)size - 1;
-    while (end > 0)
-    {
-        temp = array[end];
-        array[end] = array[0];
-        array[0] = temp;
-        end = end - 1;
-        print_array(array, size);
-        siftDown(array, 0, end, size);
-    }
+	end = (int)size - 1;
+	while (end > 0)
+	{
+		temp = array[end];
+		array[end] = array[0];
+		array[0] = temp;
+		end = end - 1;
+		print_array(array, size);
+		siftDown(array, 0, end, size);
+	}
 }
 
+/**
+ * heapify - heapify
+ *
+ * @array: The array to be sorted
+ * @size: Size of the array
+*/
 void heapify(int *array, size_t size)
 {
-    int start = ((int)size - 2) / 2;
+	int start = ((int)size - 2) / 2;
 
-    while (start >= 0)
-    {
-        siftDown(array, start, size - 1, size);
-        start = start - 1;
-    }
+	while (start >= 0)
+	{
+		siftDown(array, start, size - 1, size);
+		start = start - 1;
+	}
 }
 
+/**
+ * siftDown - sifts down
+ *
+ * @array: The array to be sorted
+ * @size: Size of the array
+ * @start: start value
+ * @end: end value
+*/
 void siftDown(int *array, int start, int end, size_t size)
 {
-    int root;
-    root = start;
+	int root;
 
-    while (root * 2 + 1 <= end)
-    {
-        int child, temp = 0;
+	root = start;
+	while (root * 2 + 1 <= end)
+	{
+		int child, temp = 0;
 
-        child = root * 2 + 1;
-        if (child + 1 <= end && array[child] < array[child + 1])
-            child += 1;
-        if (array[root] < array[child])
-        {
-            temp = array[root];
-            array[root] = array[child];
-            array[child] = temp;
-            root = child;
-            print_array(array, size);
-        }
-        else
-            return;
-    }
+		child = root * 2 + 1;
+		if (child + 1 <= end && array[child] < array[child + 1])
+			child += 1;
+		if (array[root] < array[child])
+		{
+			temp = array[root];
+			array[root] = array[child];
+			array[child] = temp;
+			root = child;
+			print_array(array, size);
+		}
+		else
+			return;
+	}
 }
