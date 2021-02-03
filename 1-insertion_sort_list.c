@@ -11,7 +11,7 @@ void insertion_sort_list(listint_t **list)
 
 	if (!list || *list == NULL)
 		return;
-	
+
 	if ((*list)->next == NULL)
 		return;
 
