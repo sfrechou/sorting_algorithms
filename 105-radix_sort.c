@@ -55,4 +55,6 @@ void radix_sort(int *array, size_t size)
 	{
 		array[i] = sort[i];
 	}
+	free(array2);
+	free(sort);
 }
