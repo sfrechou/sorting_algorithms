@@ -9,66 +9,66 @@ void merge_sort(int *array, size_t size)
     int n = (int)size;
     int *brray;
     brray = malloc(sizeof(int) * size);
-    CopyArray(array, 0, n, brray);
-    TopDownSplitMerge(brray, 0, n, array);
+    copy_array(array, 0, n, brray);
+    topDown_split_merge(brray, 0, n, array);
     free(brray);
 }
-void TopDownSplitMerge(int B[], int iBegin, int iEnd, int A[])
+void topDown_split_merge(int barray[], int start, int end, int array[])
 {
-    int iMiddle, m;
-    if (iEnd - iBegin <= 1)
+    int middle, index;
+    if (end - start <= 1)
         return;                                 
-    iMiddle = (iEnd + iBegin) / 2;
-    TopDownSplitMerge(A, iBegin,  iMiddle, B);
-    TopDownSplitMerge(A, iMiddle, iEnd, B);
+    middle = (end + start) / 2;
+    topDown_split_merge(array, start, middle, barray);
+    topDown_split_merge(array, middle, end, barray);
     printf("Merging...\n");
-    TopDownMerge(B, iBegin, iMiddle, iEnd, A);
+    topDown_merge(barray, start, middle, end, array);
     printf("[Done]: ");
-    for (m = iBegin; m < iEnd; m++)
+    for (index = start; index < end; index++)
     {
-        printf("%d", A[m]);
-        if (m != iEnd - 1)
+        printf("%d", array[index]);
+        if (index != end - 1)
             printf(", ");
     }
     printf("\n");
 }
-void TopDownMerge(int A[], int iBegin, int iMiddle, int iEnd, int B[])
+void topDown_merge(int array[], int start, int  middle, int end, int barray[])
 {
-    int i = iBegin, j = iMiddle, k, m;
+    int i = start, j = middle, k, index;
 
-    for (k = iBegin; k < iEnd; k++)
+    for (k = start; k < end; k++)
     {
-        if (i < iMiddle && (j >= iEnd || A[i] <= A[j])) 
+        if (i < middle && (j >= end || array[i] <= barray[j])) 
         {
-            B[k] = A[i];
+            barray[k] = array[i];
             i = i + 1;
         }
         else
         {
-            B[k] = A[j];
+            barray[k] = array[j];
             j = j + 1;
         }
     }
     printf("[left]: ");
-    for (m = iBegin; m < iMiddle; m++)
+    for (index = start; index < middle; index++)
     {
-        printf("%d", A[m]);
-        if (m != iMiddle - 1)
+        printf("%d", array[index]);
+        if (index != middle - 1)
             printf(", ");
     }
     printf("\n");
     printf("[right]: ");
-    for (m = iMiddle; m < iEnd; m++)
+    for (index = middle; index < end; index++)
     {
-        printf("%d", A[m]);
-        if (m != iEnd - 1)
+        printf("%d", array[index]);
+        if (index != end - 1)
             printf(", ");
     }
     printf("\n");
 }
-void CopyArray(int A[], int iBegin, int iEnd, int B[])
+void copy_array(int array[], int start, int end, int barray[])
 {
     int k;
-    for(k = iBegin; k < iEnd; k++)
-        B[k] = A[k];
+    for(k = start; k < end; k++)
+        barray[k] = array[k];
 }

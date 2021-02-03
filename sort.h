@@ -34,8 +34,11 @@ void shell_sort(int *array, size_t size);
 void cocktail_sort_list(listint_t **list);
 void counting_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
-void TopDownSplitMerge(int B[], int iBegin, int iEnd, int A[]);
-void TopDownMerge(int A[], int iBegin, int iMiddle, int iEnd, int B[]);
-void CopyArray(int A[], int iBegin, int iEnd, int B[]);
+void topDown_split_merge(int barray[], int start, int end, int array[]);
+void topDown_merge(int array[], int start, int  middle, int end, int barray[]);
+void copy_array(int array[], int start, int end, int barray[]);
+void heap_sort(int *array, size_t size);
+void heapify(int *array, size_t size);
+void siftDown(int *array, int start, int end, size_t size);
 
 #endif
