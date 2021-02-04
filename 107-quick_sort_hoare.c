@@ -10,6 +10,9 @@ void quick_sort_hoare(int *array, size_t size)
 {
 	int lo = 0, hi = (int)size - 1;
 
+	if (size < 2)
+		return;
+
 	h_quick_sort(array, lo, hi, size);
 }
 
